@@ -1,3 +1,3 @@
 <div id="footer">
-<p>&copy; 2021 Motivadea IT Solutions</p>
+<p>&copy; {{date("Y")}} by Motivadea IT Solutions | <a href="https://motivadea.com" target="_blank">www.motivadea.com</a></p>
 </div>

@@ -127,6 +127,12 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('cabang/{idcabang}/produk/{idproduk}/edit','CabangController@editproduk');
     Route::patch('produkcabang','CabangController@update');
     Route::get('cabang/transaksi/{idcabang}','CabangController@indextransaksi');
+
+    //Update Detail penjualan
+    Route::get('updatedetailpenjualan','TransaksiPenjualanController@updatedetailpenjualan');
+
+    //Notifikasi
+    Route::get('notifikasi','HomePageController@notifikasi');
 });
 
 

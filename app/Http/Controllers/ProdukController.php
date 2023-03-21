@@ -19,6 +19,7 @@ use PDF;
 use DB;
 use Excel;
 use Auth;
+use OneSignal;
 
 class ProdukController extends Controller
 {
@@ -64,9 +65,6 @@ class ProdukController extends Controller
             $produkcabang->save();
         }
 
-        //Sinkronisasi Data dengan Server Website
-
-
         Session::flash('flash_message', 'Data Produk Berhasil Disimpan');
         return redirect('produk');
     }
@@ -98,8 +96,10 @@ class ProdukController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Ubah harga jual dari " . $produk->hargajual . " menjadi " . $request->hargajual;
+            $history->deskripsi = "Ubah harga jual dari " . $produk->hargajual . " menjadi " . $request->hargajual . " (Catatan: " . $request->catatan . ")";
             $history->jenis = "produk";
+            $notifikasi = $history->namauser ." => ". $history->deskripsi;
+            $this->kirimnotifikasi($notifikasi,$produk->id);
             $history->save();
         }
         if($produk->hargagrosir != $request->hargagrosir){
@@ -110,8 +110,10 @@ class ProdukController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Ubah harga grosir dari " . $produk->hargagrosir . " menjadi " . $request->hargagrosir;
+            $history->deskripsi = "Ubah harga grosir dari " . $produk->hargagrosir . " menjadi " . $request->hargagrosir . " (Catatan: " . $request->catatan . ")";
             $history->jenis = "produk";
+            $notifikasi = $history->namauser ." => ". $history->deskripsi;
+            $this->kirimnotifikasi($notifikasi,$produk->id);
             $history->save();
         }
         if($produk->hargadistributor != $request->hargadistributor){
@@ -122,8 +124,10 @@ class ProdukController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Ubah harga distributor dari " . $produk->hargadistributor . " menjadi " . $request->hargadistributor;
+            $history->deskripsi = "Ubah harga distributor dari " . $produk->hargadistributor . " menjadi " . $request->hargadistributor . " (Catatan: " . $request->catatan . ")";
             $history->jenis = "produk";
+            $notifikasi = $history->namauser ." => ". $history->deskripsi;
+            $this->kirimnotifikasi($notifikasi,$produk->id);
             $history->save();
         }
         if($produk->stok != $request->stok){
@@ -134,8 +138,10 @@ class ProdukController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Ubah jumlah stok dari " . $produk->stok . " menjadi " . $request->stok;
+            $history->deskripsi = "Ubah jumlah stok dari " . $produk->stok . " menjadi " . $request->stok . " (Catatan: " . $request->catatan . ")";
             $history->jenis = "produk";
+            $notifikasi = $history->namauser ." => ". $history->deskripsi;
+            $this->kirimnotifikasi($notifikasi,$produk->id);
             $history->save();
         }
         if($produk->kodeproduk != $request->kodeproduk){
@@ -146,8 +152,10 @@ class ProdukController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Ubah Kode Produk dari " . $produk->kodeproduk . " menjadi " . $request->kodeproduk;
+            $history->deskripsi = "Ubah Kode Produk dari " . $produk->kodeproduk . " menjadi " . $request->kodeproduk . " (Catatan: " . $request->catatan . ")";
             $history->jenis = "produk";
+            $notifikasi = $history->namauser ." => ". $history->deskripsi;
+            $this->kirimnotifikasi($notifikasi,$produk->id);
             $history->save();
         }
         if($produk->namaproduk != $request->namaproduk){
@@ -158,14 +166,36 @@ class ProdukController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Ubah Nama Produk dari " . $produk->namaproduk . " menjadi " . $request->namaproduk;
+            $history->deskripsi = "Ubah Nama Produk dari " . $produk->namaproduk . " menjadi " . $request->namaproduk . " (Catatan: " . $request->catatan . ")";
             $history->jenis = "produk";
+            $notifikasi = $history->namauser ." => ". $history->deskripsi;
+            $this->kirimnotifikasi($notifikasi,$produk->id);
             $history->save();
         }
         $produk->update($input);
- 
+
         Session::flash('flash_message', 'Data Produk berhasil diupdate');
         return redirect('produk');
+    }
+    public function kirimnotifikasi($notifikasi,$produk){
+        //Notifikasi semua user
+        OneSignal::sendNotificationToAll(
+            $notifikasi, 
+            $url = "http://192.168.1.100:8000/produk/history/".$produk, 
+            $data = null, 
+            $buttons = null, 
+            $schedule = null
+        );
+        //Notifikasi spesifik user
+        /*$userId = "faf8f81c-4bb4-4663-bf1e-576442853108";
+        OneSignal::sendNotificationToUser(
+            $notifikasi,
+            $userId,
+            $url = null,
+            $data = null,
+            $buttons = null,
+            $schedule = null
+        );*/
     }
     public function history($idproduk){
         settype($idproduk, "integer");

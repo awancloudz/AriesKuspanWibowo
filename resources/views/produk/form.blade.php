@@ -159,6 +159,17 @@
 	</div>
   </div>
 </div>
+@if (isset($produk))
+<div class="row">
+  <div class="col-md-6">
+	{{-- Catatan Update --}}
+	<div class="form-group">
+		{!! Form::label('catatan','Catatan/Alasan Edit Produk ',['class' => 'control-label']) !!}
+		{!! Form::text('catatan', null,['class' => 'form-control','id'=>'catatan']) !!}
+	</div>
+  </div>
+</div>
+@endif
 <div class="row">
   <div class="col-md-3">
 	{{-- Submit button --}}

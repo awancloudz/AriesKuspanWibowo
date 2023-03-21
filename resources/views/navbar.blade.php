@@ -173,6 +173,7 @@
 				 	@endif
 		 		</ul>
 		 	</li>
+		 	<li><a href="{{ url('notifikasi') }}">Notifikasi</a></li>
 		 </ul>
 		@elseif(Auth::user()->level == 'grosir')
 		<ul class="nav navbar-nav">

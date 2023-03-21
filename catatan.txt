@@ -1,0 +1,19 @@
+1. plugin notifikasi : https://github.com/berkayk/laravel-onesignal
+2. edit Vendor\berkayk\onesignal-laravel\src\OneSignalClient.php Line:86
+    add code>>
+    function tap($value, $callback)
+    {
+    $callback($value);
+    return $value;
+    }
+3. app_id disimpan di file config/onesignal.php
+4. subscribe user untuk pertama kali saja, dan set user_id (template.blade.php)
+5. setting di dashboard onesignal IP ADDRESS SERVER
+6. setting => chrome://flags/#unsafely-treat-insecure-origin-as-secure IP ADDRESS SERVER
+
+EDIT / UPDATE CODING :
+- update harga di DetailPenjualan -> sinkron field harga dari harga produk        (OK)
+- edit semua coding yang berhubungan dengan DetailPenjualan:                      (X)
+  -> TRANSAKSI (View, Cetak Faktur/Struk), LAPORAN (View, Cetak, Export) 
+- field baru History -> catatan                                                   (OK)
+- field baru Database DetailPenjualan -> hargajual, hargagrosir, hargadistributor (OK)

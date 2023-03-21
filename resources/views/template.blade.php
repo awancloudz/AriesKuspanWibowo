@@ -18,6 +18,38 @@
 <script src="{{ asset ('http://laravelapp.dev/js/htmlshiv_3_7_2.min.js')}}"></script>
 <script src="{{ asset ('http://laravelapp.dev/js/respond_1_4_2.min.js')}}"></script>
 -->
+<!-- 
+LOCALHOST  
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "0f61b99f-8a8d-4d52-a835-3e2acea95f06",
+      safari_web_id: "web.onesignal.auto.542681a0-163f-4163-99a6-540b36eadb1c",
+      notifyButton: {
+        enable: true,
+      },
+      allowLocalhostAsSecureOrigin: true,
+    });
+  });
+</script> -->
+<!--
+  SERVERHOST 192.168.1.100
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "0f61b99f-8a8d-4d52-a835-3e2acea95f06",
+      safari_web_id: "web.onesignal.auto.542681a0-163f-4163-99a6-540b36eadb1c",
+      notifyButton: {
+        enable: true,
+      },
+      subdomainName: "192-168-43-251",
+    });
+  });
+</script>-->
 </head>
 <body>
 @include ('navbar')
@@ -99,18 +131,5 @@
       return false;
   }
 </script>
-<!-- <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "0f61b99f-8a8d-4d52-a835-3e2acea95f06",
-      notifyButton: {
-        enable: true,
-      },
-      subdomainName: "kuspan",
-    });
-  });
-</script> -->
 </body>
 </html>

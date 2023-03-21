@@ -57,6 +57,18 @@ class TransaksiPenjualanController extends Controller
         }
         echo "Migrasi Data Sukses!";
     }
+    public function updatedetailpenjualan(){
+        $detailpenjualan = DetailPenjualan::all();
+        foreach($detailpenjualan as $detail){
+            $jenis = $detail->transaksipenjualan->jenis;
+            $detail->hargadistributor = $detail->produk->hargadistributor;
+            $detail->hargagrosir = $detail->produk->hargagrosir;
+            $detail->hargajual = $detail->produk->hargajual;
+            echo $jenis . " : " . $detail->id_produk . "<br>";
+            $detail->update();
+        }
+        echo "Sukses Update Harga!";
+    }
     public function store(Request $request){
         //1. Mengambil value dari input text
         $input = $request->all();
@@ -129,6 +141,18 @@ class TransaksiPenjualanController extends Controller
             $detailpenjualan->jumlah = $keranjang->jumlah;
             $detailpenjualan->diskon = $keranjang->diskon;
             $detailpenjualan->diskonrp = $keranjang->diskonrp;
+            if($jenistrans == 'pembelian'){
+                $detailpenjualan->harga = $keranjang->produk->hargadistributor;
+            }
+            else if($jenistrans == 'retail'){
+                $detailpenjualan->harga = $keranjang->produk->hargajual;
+            }
+            else if($jenistrans == 'grosir'){
+                $detailpenjualan->harga = $keranjang->produk->hargagrosir;
+            }
+            else if($jenistrans == 'kirimcabang'){
+                $detailpenjualan->harga = $keranjang->produk->hargagrosir;
+            }
             $detailpenjualan->save();
             //Update Stok
             if(Auth::check()){
