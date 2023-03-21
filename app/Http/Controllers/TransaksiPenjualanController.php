@@ -60,7 +60,9 @@ class TransaksiPenjualanController extends Controller
     public function updatedetailpenjualan(){
         ini_set('memory_limit', '-1');
         $no = 1;
-        $detailpenjualan = DetailPenjualan::all();
+        $from = '2023-01-01 04:19:57.000000';
+        $to = '2023-03-22 04:19:57.000000';
+        $detailpenjualan = DetailPenjualan::whereBetween('created_at', [$from, $to])->orderBy('created_at', 'desc')->get();
         foreach($detailpenjualan as $detail){
             $jenis = $detail->transaksipenjualan->jenis;
             $detail->hargadistributor = $detail->produk->hargadistributor;
