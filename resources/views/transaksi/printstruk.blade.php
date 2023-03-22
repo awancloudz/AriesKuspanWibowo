@@ -28,16 +28,10 @@
 </table>
 
 <table width="100%">
-<!-- <tr><th>Kode</th><td width="80%">: {{ $transaksi->kodepenjualan }}
-</td></tr> -->
-   <!--  <?php
-        //echo DNS1D::getBarcodeHTML($transaksi->kodepenjualan, "C128");
-    ?> -->
-<!-- <tr style="font-size: 3;"><th>Jenis</th><td>: <?php echo ucfirst($transaksi->jenis); ?></td></tr> -->
-<tr><th>Tanggal</th><td width="80%">: {{ date('d-m-Y', strtotime($transaksi->tanggal)) }}</td></tr>
-<tr><th>Jam</th><td width="80%">: {{ date('H:i:s', strtotime($transaksi->created_at))}}</td></tr>
-<tr><th>Kasir</th><td width="80%">: {{ $transaksi->users->name }}</td></tr>
-<tr><td>-------------------------------------------------</td></tr>
+<tr><td><b>Tanggal</td><td>: {{ date('d-m-Y', strtotime($transaksi->tanggal)) }}</td></tr>
+<tr><td><b>Jam</td><td>: {{ date('H:i:s', strtotime($transaksi->created_at))}}</td></tr>
+<tr><td><b>Kasir</td><td>: {{ $transaksi->users->name }}</td></tr>
+<tr><td colspan="2">-------------------------------------------------</td></tr>
 </table>
 <table width="100%">
 <tr><th>Nama</th><th>Harga</th><td align="center"><b>Total</td></tr>
@@ -56,7 +50,7 @@
 		?>
 	@endif
 <?php
-$nominal1 = $item->produk->diskon;
+$nominal1 = $item->diskon;
 if($transaksi->jenis == 'pembelian'){
 $nominal2 = ($item->diskon / 100) * $item->produk->hargadistributor;
 $nominal = $nominal1 + $nominal2;
@@ -80,17 +74,17 @@ $nominal = $nominal1 + $nominal2;
 $totalbeli =  ($item->produk->hargagrosir * $item->jumlah) - ($item->jumlah * $nominal);
 }
 ?>
-<tr style="font-size: 6;" valign="top"><td width="40%">{{ $item->produk->namaproduk }}</td>
+<tr style="font-size: 6;" valign="top"><td width="20%">{{ $item->produk->namaproduk }}</td>
 @if($transaksi->jenis == 'pembelian')
 <td>{{ rupiah($item->produk->hargadistributor) }}</td>
 @elseif($transaksi->jenis == 'retail')
-<td width="30%">
+<td width="40%">
 @if($transaksi->statustoko == 'cabang')
 {{ $item->jumlah }} X {{ rupiah($hargacabang) }}
 @else
 {{ $item->jumlah }} X {{ rupiah($item->produk->hargajual) }}
 @endif
-    @if($nominal1 != 0)
+    @if($item->diskonrp != 0)
     <br>- Diskon 1
     @endif
     @if($nominal2 != 0)
@@ -100,8 +94,8 @@ $totalbeli =  ($item->produk->hargagrosir * $item->jumlah) - ($item->jumlah * $n
 @elseif($transaksi->jenis == 'grosir')
 <td>{{ rupiah($item->produk->hargagrosir) }}</td>
 @endif
-	<td width="30%" align="right">{{ rupiah($totalbeli) }}<br>
-    @if($nominal1 != 0)
+	<td width="40%" align="right">{{ rupiah($totalbeli) }}<br>
+    @if($item->diskonrp != 0)
     ({{ rupiah($item->jumlah * $item->diskonrp) }})<br>
     @endif
     @if($nominal2 != 0)
@@ -111,7 +105,7 @@ $totalbeli =  ($item->produk->hargagrosir * $item->jumlah) - ($item->jumlah * $n
     <?php $i++; ?>
 @endforeach
 <tr><td colspan="3">-------------------------------------------------</td></tr>
-<tr><td align="right" width="30%"><b>Total Belanja</td><td align="right" colspan="2">{{ rupiah($transaksi->totalbelanja) }}</td>
+<tr><td align="right" width="40%"><b>Total Belanja</td><td align="right" colspan="2">{{ rupiah($transaksi->totalbelanja) }}</td>
 <tr><td align="right" width="40%"><b>Total Diskon</td><td align="right" colspan="2">{{ rupiah($transaksi->totaldiskon) }}</td></tr>
 <tr><td align="right" width="40%"><b>Sub Total</td><td align="right" colspan="2">{{ rupiah($transaksi->subtotal) }}</td></tr>
 <tr><td align="right" width="40%"><b>Bayar</td><td align="right" colspan="2">{{ rupiah($transaksi->bayar) }}</td></tr>
