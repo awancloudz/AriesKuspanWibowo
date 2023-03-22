@@ -49,7 +49,20 @@ LOCALHOST
       subdomainName: "192-168-43-251",
     });
   });
-</script>-->
+</script>
+
+<script>
+// Do NOT call init twice, use existing init
+OneSignal.push(["init", {
+  // Your other settings
+  webhooks: {
+    cors: false, // Defaults to false if omitted
+    'notification.displayed': '/', // e.g. https://site.com/hook
+    'notification.clicked': '/notifikasi',
+    // ... follow the same format for any event in the list above
+  }
+}]);
+</script> -->
 </head>
 <body>
 @include ('navbar')

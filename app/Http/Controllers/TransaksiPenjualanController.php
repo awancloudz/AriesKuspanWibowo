@@ -19,6 +19,7 @@ use Session;
 use PDF;
 use Auth;
 use Redirect;
+use OneSignal;
 
 class TransaksiPenjualanController extends Controller
 {
@@ -119,8 +120,12 @@ class TransaksiPenjualanController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "[" . $transaksi->kodepenjualan . "] Input Transaksi Pembelian/Order";
+            $link = "[<a href='http://192.168.1.100:8000/transaksi/view/" . $transaksi->id . "'>" . $transaksi->kodepenjualan . "</a>] ";
+            $deskripsi = "Input Transaksi Pembelian/Order";
             $history->jenis = "transaksi";
+            $history->deskripsi = $link . $deskripsi;
+            $notifikasi = $history->namauser ." => [". $transaksi->kodepenjualan ."] " .$deskripsi;
+            $this->kirimnotifikasi($notifikasi);
             $history->save();
         }
 
@@ -201,6 +206,16 @@ class TransaksiPenjualanController extends Controller
             return redirect('jenistransaksi/' . $jenistrans);
         }
     }
+    public function kirimnotifikasi($notifikasi){
+        //Notifikasi semua user
+        OneSignal::sendNotificationToAll(
+            $notifikasi, 
+            $url = "http://192.168.1.100:8000/notifikasi", 
+            $data = null, 
+            $buttons = null, 
+            $schedule = null
+        );
+    }
     public function updateapp(Request $request){
         $item = $request->id;
         settype($item, "integer"); 
@@ -278,8 +293,12 @@ class TransaksiPenjualanController extends Controller
         $history->namauser = Auth::user()->name;
         }
         $history->tanggal = date("Y-m-d");
-        $history->deskripsi = "[" . $transaksi->kodepenjualan . "] Klik Tombol Konfirmasi Order";
+        $link = "[<a href='http://192.168.1.100:8000/transaksi/view/" . $transaksi->id . "'>" . $transaksi->kodepenjualan . "</a>] ";
+        $deskripsi = "Klik Tombol Konfirmasi Order";
         $history->jenis = "transaksi";
+        $history->deskripsi = $link . $deskripsi;
+        $notifikasi = $history->namauser ." => [". $transaksi->kodepenjualan ."] " .$deskripsi;
+        $this->kirimnotifikasi($notifikasi);
         $history->save();
 
         Session::flash('flash_message', 'Transaksi Pembelian sudah dikonfirmasi.');
@@ -299,8 +318,12 @@ class TransaksiPenjualanController extends Controller
         $history->namauser = Auth::user()->name;
         }
         $history->tanggal = date("Y-m-d");
-        $history->deskripsi = "Klik tombol " . $status . " untuk produk ". $detail->produk->namaproduk;
+        $link = "[<a href='http://192.168.1.100:8000/transaksi/view/" . $detail->id_transaksipenjualan . "'>" . $detail->transaksipenjualan->kodepenjualan . "</a>] ";
+        $deskripsi = "Klik tombol " . $status . " untuk produk ". $detail->produk->namaproduk;
         $history->jenis = "transaksi";
+        $history->deskripsi = $link . $deskripsi;
+        $notifikasi = $history->namauser ." => [". $detail->transaksipenjualan->kodepenjualan ."] " .$deskripsi;
+        $this->kirimnotifikasi($notifikasi);
         $history->save();
 
         return redirect('transaksi/view/'. $detail->id_transaksipenjualan);
@@ -331,8 +354,12 @@ class TransaksiPenjualanController extends Controller
         $history->namauser = Auth::user()->name;
         }
         $history->tanggal = date("Y-m-d");
-        $history->deskripsi = "Klik Tombol Verifikasi Order";
+        $link = "[<a href='http://192.168.1.100:8000/transaksi/view/" . $transaksi->id . "'>" . $transaksi->kodepenjualan . "</a>] ";
+        $deskripsi = "Klik Tombol Verifikasi Order";
         $history->jenis = "transaksi";
+        $history->deskripsi = $link . $deskripsi;
+        $notifikasi = $history->namauser ." => [". $transaksi->kodepenjualan ."] " .$deskripsi;
+        $this->kirimnotifikasi($notifikasi);
         $history->save();
 
         Session::flash('flash_message', 'Stok dari Transaksi Pembelian sudah diverifikasi.');
@@ -589,8 +616,12 @@ class TransaksiPenjualanController extends Controller
         $history->namauser = Auth::user()->name;
         }
         $history->tanggal = date("Y-m-d");
-        $history->deskripsi = "Ubah jumlah produk " . $detail->produk->namaproduk . " dari " . $detail->jumlah . " menjadi " . $request->jumlah;
+        $link = "[<a href='http://192.168.1.100:8000/transaksi/view/" . $detail->id_transaksipenjualan . "'>" . $detail->transaksipenjualan->kodepenjualan . "</a>] ";
+        $deskripsi = "Ubah jumlah produk " . $detail->produk->namaproduk . " dari " . $detail->jumlah . " menjadi " . $request->jumlah;
         $history->jenis = "transaksi";
+        $history->deskripsi = $link . $deskripsi;
+        $notifikasi = $history->namauser ." => [". $detail->transaksipenjualan->kodepenjualan ."] " .$deskripsi;
+        $this->kirimnotifikasi($notifikasi);
         $history->save();
 
         $detail->update($input);

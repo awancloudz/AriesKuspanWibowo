@@ -173,7 +173,11 @@
 				 	@endif
 		 		</ul>
 		 	</li>
-		 	<li><a href="{{ url('notifikasi') }}">Notifikasi</a></li>
+		 	<li><a href="{{ url('notifikasi') }}">Notifikasi 
+			@if(count($jumlah_notifikasi) > 0)
+			<span style="background-color:#f00;" class="badge">{{count($jumlah_notifikasi)}}</span>
+			@endif
+			</a></li>
 		 </ul>
 		@elseif(Auth::user()->level == 'grosir')
 		<ul class="nav navbar-nav">

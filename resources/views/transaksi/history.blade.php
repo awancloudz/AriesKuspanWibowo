@@ -25,7 +25,7 @@
 				<td><?php echo $i; $i++;?></td>
 				<td>{{ date('d-m-Y', strtotime($history->tanggal)) }}</td>
 				<td>{{ date('H:i:s', strtotime($history->created_at))}}</td>
-				<td>{{ $history->deskripsi }}</td>
+				<td>{!! $history->deskripsi !!}</td>
 				<td>{{ $history->namauser }}</td>
 			</tr>
 			@endforeach

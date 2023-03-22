@@ -17,3 +17,4 @@ EDIT / UPDATE CODING :
   -> TRANSAKSI (View, Cetak Faktur/Struk), LAPORAN (View, Cetak, Export) 
 - field baru History -> catatan                                                   (OK)
 - field baru Database DetailPenjualan -> hargajual, hargagrosir, hargadistributor (OK)
+- field baru Database History -> dibaca (enum: belum,sudah)                       (OK)

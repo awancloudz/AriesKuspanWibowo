@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Produk;
 use App\History;
+use Session;
 
 class HomePageController extends Controller
 {
@@ -20,5 +21,14 @@ class HomePageController extends Controller
         $notifikasi_list = History::orderBy('created_at', 'desc')->paginate(20);
         $jumlah_notifikasi = History::count();
         return view('pages.notifikasi', compact('notifikasi_list','jumlah_notifikasi'));
+    }
+    public function notifikasiread(){
+        $notifikasi_belum = History::where('dibaca','belum')->get();
+        foreach($notifikasi_belum as $notifikasi){
+            $notifikasi->dibaca = "sudah";
+            $notifikasi->update();
+        }
+        Session::flash('flash_message', 'Semua Notifikasi Sudah Ditandai dibaca!');
+        return redirect('notifikasi');
     }
 }

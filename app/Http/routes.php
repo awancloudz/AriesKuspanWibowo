@@ -133,6 +133,7 @@ Route::group(['middleware' => ['web']], function(){
 
     //Notifikasi
     Route::get('notifikasi','HomePageController@notifikasi');
+    Route::get('notifikasi/read','HomePageController@notifikasiread');
 });
 
 

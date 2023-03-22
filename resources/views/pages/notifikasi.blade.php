@@ -2,7 +2,12 @@
 
 @section('main')
 <div id="transaksi" class="panel panel-default">
-<div class="panel-heading"><b><h4>Notifikasi</h4></b></div>
+@include('_partial.flash_message')
+<div class="panel-heading"><b><h4>Notifikasi</h4></b> 
+	<div class="box-button">
+		<a href="{{ url('notifikasi/read') }}" class="btn btn-primary btn-sm text-center"><i class="glyphicon glyphicon-ok"></i> <b>Tandai Sudah Dibaca</b></a>
+	</div>
+</div>
 	<div class="panel-body">
 	<!-- Tampil Transaksi -->
 	@if (count($notifikasi_list) > 0)
@@ -19,11 +24,15 @@
 		<tbody>
 			<?php $i=1; ?>
 			@foreach($notifikasi_list as $notifikasi)
+			@if($notifikasi->dibaca == 'belum')
+			<tr style="font-weight: bold;">
+			@else
 			<tr>
+			@endif
 				<td><?php echo $i; $i++;?></td>
 				<td>{{ date('d-m-Y', strtotime($notifikasi->tanggal)) }}</td>
 				<td>{{ date('H:i:s', strtotime($notifikasi->created_at))}}</td>
-				<td>{{ $notifikasi->deskripsi }}</td>
+				<td>{!! $notifikasi->deskripsi !!}</td>
 				<td>{{ $notifikasi->namauser }}</td>
 			</tr>
 			@endforeach
