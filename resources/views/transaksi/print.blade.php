@@ -63,7 +63,7 @@ Customer
 
 <td><b>Jam</td><td>: {{ date('H:i:s', strtotime($transaksi->created_at))}}</td>
 </tr>
-<tr><td colspan="3"></td><th>Kasir</th><td>: {{ $transaksi->users->name }}</td></tr>
+<tr><td colspan="3"></td><td><b>Kasir</td><td>: {{ $transaksi->users->name }}</td></tr>
 @endforeach
 </table><br>
 <h3 align="center">FAKTUR PENJUALAN</h3>
@@ -161,9 +161,9 @@ $diskonperall = $diskonperall + $item->diskon;
 @endif
 <tr><td colspan="8"><hr></td></tr>
 <!-- <tr><td colspan="5"></td><td colspan="2"><b>Total Belanja</td><th>{{ rupiah($transaksi->totalbelanja) }}</th></td> -->
-<tr><td colspan="5"></td><td colspan="2"><b>Diskon</td><th>{{ rupiah($transaksi->totaldiskon) }}</th></tr>
+<tr><td colspan="5"></td><td colspan="2"><b>Diskon</td><td><b>{{ rupiah($transaksi->totaldiskon) }}</td></tr>
 <!-- <tr><td colspan="5"></td><td colspan="2"><b>PPn</td><th>{{ rupiah(0) }}</th></tr> -->
-<tr><td colspan="5"></td><td colspan="2"><b>Sub Total</td><th>{{ rupiah($transaksi->subtotal) }}</th></tr>
+<tr><td colspan="5"></td><td colspan="2"><b>Sub Total</td><td><b>{{ rupiah($transaksi->subtotal) }}</td></tr>
 <tr>
 <td><br><br><b>Tanda Terima
 <br><br><br><br><br><hr></b></td>
