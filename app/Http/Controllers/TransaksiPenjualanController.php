@@ -119,7 +119,7 @@ class TransaksiPenjualanController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Input Transaksi Pembelian/Order";
+            $history->deskripsi = "[" . $transaksi->kodepenjualan . "] Input Transaksi Pembelian/Order";
             $history->jenis = "transaksi";
             $history->save();
         }
@@ -278,7 +278,7 @@ class TransaksiPenjualanController extends Controller
         $history->namauser = Auth::user()->name;
         }
         $history->tanggal = date("Y-m-d");
-        $history->deskripsi = "Klik Tombol Konfirmasi Order";
+        $history->deskripsi = "[" . $transaksi->kodepenjualan . "] Klik Tombol Konfirmasi Order";
         $history->jenis = "transaksi";
         $history->save();
 

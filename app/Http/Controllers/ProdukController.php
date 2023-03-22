@@ -96,7 +96,7 @@ class ProdukController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Ubah harga jual dari " . $produk->hargajual . " menjadi " . $request->hargajual . " (Catatan: " . $request->catatan . ")";
+            $history->deskripsi = "[" . $produk->namaproduk . "] Ubah harga jual dari " . $produk->hargajual . " menjadi " . $request->hargajual . " (Catatan: " . $request->catatan . ")";
             $history->jenis = "produk";
             $notifikasi = $history->namauser ." => ". $history->deskripsi;
             $this->kirimnotifikasi($notifikasi,$produk->id);
@@ -110,7 +110,7 @@ class ProdukController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Ubah harga grosir dari " . $produk->hargagrosir . " menjadi " . $request->hargagrosir . " (Catatan: " . $request->catatan . ")";
+            $history->deskripsi = "[" . $produk->namaproduk . "] Ubah harga grosir dari " . $produk->hargagrosir . " menjadi " . $request->hargagrosir . " (Catatan: " . $request->catatan . ")";
             $history->jenis = "produk";
             $notifikasi = $history->namauser ." => ". $history->deskripsi;
             $this->kirimnotifikasi($notifikasi,$produk->id);
@@ -124,7 +124,7 @@ class ProdukController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Ubah harga distributor dari " . $produk->hargadistributor . " menjadi " . $request->hargadistributor . " (Catatan: " . $request->catatan . ")";
+            $history->deskripsi = "[" . $produk->namaproduk . "] Ubah harga distributor dari " . $produk->hargadistributor . " menjadi " . $request->hargadistributor . " (Catatan: " . $request->catatan . ")";
             $history->jenis = "produk";
             $notifikasi = $history->namauser ." => ". $history->deskripsi;
             $this->kirimnotifikasi($notifikasi,$produk->id);
@@ -138,7 +138,7 @@ class ProdukController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Ubah jumlah stok dari " . $produk->stok . " menjadi " . $request->stok . " (Catatan: " . $request->catatan . ")";
+            $history->deskripsi = "[" . $produk->namaproduk . "] Ubah jumlah stok dari " . $produk->stok . " menjadi " . $request->stok . " (Catatan: " . $request->catatan . ")";
             $history->jenis = "produk";
             $notifikasi = $history->namauser ." => ". $history->deskripsi;
             $this->kirimnotifikasi($notifikasi,$produk->id);
@@ -152,7 +152,7 @@ class ProdukController extends Controller
             $history->namauser = Auth::user()->name;
             }
             $history->tanggal = date("Y-m-d");
-            $history->deskripsi = "Ubah Kode Produk dari " . $produk->kodeproduk . " menjadi " . $request->kodeproduk . " (Catatan: " . $request->catatan . ")";
+            $history->deskripsi = "[" . $produk->namaproduk . "] Ubah Kode Produk dari " . $produk->kodeproduk . " menjadi " . $request->kodeproduk . " (Catatan: " . $request->catatan . ")";
             $history->jenis = "produk";
             $notifikasi = $history->namauser ." => ". $history->deskripsi;
             $this->kirimnotifikasi($notifikasi,$produk->id);
