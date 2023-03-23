@@ -210,6 +210,9 @@ return [
             'max' => 'Ukuran maksimum 1Mb',
             'mimes' => 'Tipe file harus .jpg,jpeg,png,bmp',
         ],
+        'catatan' => [
+            'required' => 'Catatan Wajib Diisi',
+        ],
     ],
 
     /*

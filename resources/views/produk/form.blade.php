@@ -163,9 +163,16 @@
 <div class="row">
   <div class="col-md-6">
 	{{-- Catatan Update --}}
+	@if($errors->any())
+	<div class="form-group {{ $errors->has('catatan') ? 'has-error' : 'has-success' }}">
+	@else
 	<div class="form-group">
+	@endif
 		{!! Form::label('catatan','Catatan/Alasan Edit Produk ',['class' => 'control-label']) !!}
 		{!! Form::text('catatan', null,['class' => 'form-control','id'=>'catatan']) !!}
+		@if ($errors->has('catatan'))
+		<span class="help-block">{{ $errors->first('catatan') }}</span>
+		@endif
 	</div>
   </div>
 </div>

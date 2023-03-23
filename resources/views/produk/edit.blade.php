@@ -52,8 +52,9 @@
 		var g = parseInt(document.getElementById("id_merk").value);
 		var h = parseInt(document.getElementById("diskon").value);
 		var i = parseInt(document.getElementById("stok").value);
-		
-		if(a != "" && b != null && c != "" && d != null && e != null && f != null && g != null && h != null && i != null){
+		var j = document.getElementById("catatan").value;
+
+		if(a != "" && b != null && c != "" && d != null && e != null && f != null && g != null && h != null && i != null && j != null){
 			console.log(id);
 			var xmlhttp = new XMLHttpRequest();
 		    var url = "http://arieskuspanwibowo.com/editproduksinkron";

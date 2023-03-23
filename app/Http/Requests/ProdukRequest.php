@@ -25,9 +25,11 @@ class ProdukRequest extends Request
     {
         if ($this->method() == 'PATCH'){
         $kodeproduk_rules = 'required|string|max:50|unique:produk,kodeproduk,' . $this->get('id');
+        $catatan_rules = 'required';
         }
         else{
         $kodeproduk_rules = 'required|string|max:50|unique:produk,kodeproduk';
+        $catatan_rules = 'sometimes';
         }
         return [
             'kodeproduk' => $kodeproduk_rules,
@@ -39,7 +41,8 @@ class ProdukRequest extends Request
             'hargadistributor' => 'required|numeric|max:99999999',
             'diskon' => 'required|numeric|max:99999999', 
             'stok' => 'required|numeric',   
-            'foto' => 'sometimes|image|max:1024|mimes:jpeg,jpg,bmp,png',         
+            'foto' => 'sometimes|image|max:1024|mimes:jpeg,jpg,bmp,png',    
+            'catatan' => $catatan_rules,    
         ];
     }
 }
