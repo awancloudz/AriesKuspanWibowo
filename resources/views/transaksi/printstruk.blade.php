@@ -74,11 +74,11 @@ $nominal = $nominal1 + $nominal2;
 $totalbeli =  ($item->produk->hargagrosir * $item->jumlah) - ($item->jumlah * $nominal);
 }
 ?>
-<tr style="font-size: 6;" valign="top"><td width="20%">{{ $item->produk->namaproduk }}</td>
+<tr style="font-size: 6;" valign="top"><td width="30%">{{ $item->produk->namaproduk }}</td>
 @if($transaksi->jenis == 'pembelian')
 <td>{{ rupiah($item->produk->hargadistributor) }}</td>
 @elseif($transaksi->jenis == 'retail')
-<td width="40%">
+<td width="30%">
 @if($transaksi->statustoko == 'cabang')
 {{ $item->jumlah }} X {{ rupiah($hargacabang) }}
 @else
@@ -94,7 +94,7 @@ $totalbeli =  ($item->produk->hargagrosir * $item->jumlah) - ($item->jumlah * $n
 @elseif($transaksi->jenis == 'grosir')
 <td>{{ rupiah($item->produk->hargagrosir) }}</td>
 @endif
-	<td width="40%" align="right">{{ rupiah($totalbeli) }}<br>
+	<td width="30%" align="right">{{ rupiah($totalbeli) }}<br>
     @if($item->diskonrp != 0)
     ({{ rupiah($item->jumlah * $item->diskonrp) }})<br>
     @endif
@@ -105,12 +105,12 @@ $totalbeli =  ($item->produk->hargagrosir * $item->jumlah) - ($item->jumlah * $n
     <?php $i++; ?>
 @endforeach
 <tr><td colspan="3">-------------------------------------------------</td></tr>
-<tr><td align="right" width="40%"><b>Total Belanja</td><td align="right" colspan="2">{{ rupiah($transaksi->totalbelanja) }}</td>
-<tr><td align="right" width="40%"><b>Total Diskon</td><td align="right" colspan="2">{{ rupiah($transaksi->totaldiskon) }}</td></tr>
-<tr><td align="right" width="40%"><b>Sub Total</td><td align="right" colspan="2">{{ rupiah($transaksi->subtotal) }}</td></tr>
-<tr><td align="right" width="40%"><b>Bayar</td><td align="right" colspan="2">{{ rupiah($transaksi->bayar) }}</td></tr>
-<tr><td align="right" width="40%"><b>Kembali</td><td align="right" colspan="2">{{ rupiah($transaksi->kembali) }}</td></tr>
-<tr><td align="left" width="40%" colspan="3"><hr>- Harga sudah termasuk PPN 11%<br>- Barang yang sudah dibeli tidak bisa dikembalikan.</td></tr>
+<tr><td align="right" width="30%"><b>Total Belanja</td><td align="right" colspan="2">{{ rupiah($transaksi->totalbelanja) }}</td>
+<tr><td align="right" width="30%"><b>Total Diskon</td><td align="right" colspan="2">{{ rupiah($transaksi->totaldiskon) }}</td></tr>
+<tr><td align="right" width="30%"><b>Sub Total</td><td align="right" colspan="2">{{ rupiah($transaksi->subtotal) }}</td></tr>
+<tr><td align="right" width="30%"><b>Bayar</td><td align="right" colspan="2">{{ rupiah($transaksi->bayar) }}</td></tr>
+<tr><td align="right" width="30%"><b>Kembali</td><td align="right" colspan="2">{{ rupiah($transaksi->kembali) }}</td></tr>
+<tr><td align="left" width="30%" colspan="3"><hr>- Harga sudah termasuk PPN 11%<br>- Barang yang sudah dibeli tidak bisa dikembalikan.</td></tr>
 </table>
 </div>
 </div>
