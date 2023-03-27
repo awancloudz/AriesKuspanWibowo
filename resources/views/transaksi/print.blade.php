@@ -3,7 +3,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Transaksi</title>
         <style>
-        @page { margin-top:30px;margin-bottom:15px;margin-right:15px;margin-left:15px;}
+        @page { margin-top:30px;margin-bottom:15px;margin-right:15px;margin-left:5px;}
         body{
             font-family: helvetica;
             font-size: 10;
